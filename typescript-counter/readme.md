@@ -18,3 +18,15 @@ const streak = streakCounter(localStorage, today)
 // }
 ``` 
 - To start our project, we need to first initialize it as an npm project. I’m going to use yarn so run yarn --init -y
+- Add typescript with yarn add -D typescript.
+- Our last and final step for today is to add our testing infrastructure. We'll be using ts-jest (even though Jest natively supports TypeScript) because it will also type check our tests.
+- Run yarn tsc --init to scaffold a basic tsconfig.json
+
+Follow these steps:
+Run yarn add -D typescript jest ts-jest @types/jest to install dependencies
+Run yarn tsc –init to initialize our TypeScript config (Repeated)
+Run yarn ts-jest config:init to initialize our Jest config
+Add in package.json the following:
+"scripts": {
+    "test": "jest"
+  }
