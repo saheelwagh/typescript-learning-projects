@@ -1,17 +1,17 @@
-import {formattedDate} from './utlis'
+import {buildStreak, formattedDate} from './utlis'
 // an interface specifies what properties are expected to exist on a value
-interface Streak {
-    currentCount : number
-    startDate : string
-    lastLoginDate : string
-}
+import { Streak } from './utlis'
+import { KEY } from './utlis'
+import { updateStreak } from './utlis'
 
-const KEY = 'streak'
-
-function shouldIncrementOrResetStreakCount(currentDate: Date, lastLoginDate: string) : 'increment' | 'reset' {
+function shouldIncrementOrResetStreakCount(currentDate: Date, lastLoginDate: string) : 'increment' | 'reset' | 'none'{
      // We get 11/5/2021
     // so to get 5, we split on / and get the second item
     const difference = currentDate.getDate() - parseInt(lastLoginDate.split('/')[1])
+
+    if(difference===0){
+        return 'none'
+    }
     
     if(difference ===1){ //if they logged in on a consecutive day
         return 'increment'
@@ -24,29 +24,25 @@ export function streakCounter(storage: Storage, date: Date) : Streak {
 
     if(streakInLocalStorage){
         try {
-            const streak = JSON.parse(streakInLocalStorage)
+            const streak = JSON.parse(streakInLocalStorage) as Streak
             const state = shouldIncrementOrResetStreakCount(date, streak.lastLoginDate)
             const SHOULD_INCREMENT = state === "increment"
             const SHOULD_RESET = state === "reset"
             if(SHOULD_INCREMENT){
-                const updated_streak: Streak = {
-                    ...streak,
-                    currentCount : streak.currentCount + 1,
-                    lastLoginDate : formattedDate(date),
-                }
+                const updatedStreak = buildStreak(date, {
+                    startDate : streak.startDate,
+                    currentCount : streak.currentCount+1,
+                    lastLoginDate : formattedDate(date)
+                })
                 //save updated streak count to localStorage
-                storage.setItem(KEY,JSON.stringify(updated_streak))
-            return updated_streak
-            }
-            if(SHOULD_RESET){
-                const updatedStreak: Streak = {
-                    currentCount : 1,
-                    startDate: formattedDate(date),
-                    lastLoginDate: formattedDate(date),
-                }
-            //store in localStorage
-            storage.setItem(KEY, JSON.stringify(updatedStreak))
+                updateStreak(storage,updatedStreak)
             return updatedStreak
+            }
+            if(SHOULD_RESET){ 
+                const updatedStreak = buildStreak(date)
+            //store in localStorage
+                updateStreak(storage,updatedStreak)
+                return updatedStreak
             }
             
             return streak
@@ -56,12 +52,8 @@ export function streakCounter(storage: Storage, date: Date) : Streak {
         }
     }
 
-    const streak =  {
-        currentCount : 1,
-        startDate : formattedDate(date),
-        lastLoginDate : formattedDate(date)
-    }
+    const streak = buildStreak(date)
     //store in localStorage
-    storage.setItem(KEY,JSON.stringify(streak)) //how did storage.setitem become available by default ?
+    updateStreak(storage, streak) //how did storage.setitem become available by default ?
     return streak
 }

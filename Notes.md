@@ -119,3 +119,19 @@ We have one final test to add for this section. We need to make sure the streak 
 When writing open source libraries, one of the main things to consider is what pieces of code should be exposed to the end-user
 
 the return type: ”increment” | undefined. We’re using what’s called a string literal type. This means our function literally returns  ”increment” instead of any old type. Very handy for state machines and other scenarios where you want to use a specific string.
+
+Our function takes two parameters: date and overrideDefaults. That tells TypeScript that the second parameter is optional. Since we always need a date to create a Streak object, we pass that in and make it required. If we want to override one of the defaults for some reason - i.e., incrementing the currentCount we can do so by specifying in the overrideDefaults object. See the ? after overrideDefaults?
+
+See Partial? That’s another TypeScript utility type. It tells TypeScript that the object passed in can be a partial (not the whole thing) of Streak. This means it can have some of Streak's properties, but not all. Again, we’re doing this so that this function is flexible. 
+
+
+ℹ️ Note: Typically, you want to avoid typecasting with as since it’s like telling TypeScript you know better than the compiler, but in this instance, this is the correct way to type this since we understand what streakInLocalStorage gets parsed too. Read more here.
+
+. One of the habits I’ve started, thanks to TypeScript, is thinking more deeply about my function signatures. What will the types be for these parameters? Should I pass in two parameters or an object? What will the return type be? TypeScript adds guardrails that help guide us towards the right solution when using these functions. It’s wonderful. The more you use the language, the more you start to experience the benefits.
+
+## Day 4
+Next up, we need to check index.ts. When you’re writing a library, you have to think about the API you’re exposing. Our package will indicate index.ts is the “starting point.” This means any code exported in this file will be available to the end consumer. It should only be the single-function streakCounter
+
+ We’ll publish this under a named scope, i.e., <npm username>/streak-counter. Why? Well, that way, it doesn’t matter if the name is taken! It’s also nicer for the community since this is a practice project, and we won’t squat any names.
+
+ 
