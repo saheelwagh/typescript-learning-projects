@@ -18,7 +18,7 @@ function shouldIncrementOrResetStreakCount(currentDate: Date, lastLoginDate: str
     }
     return 'reset'
 }
-
+//the fn that is exposed to end users
 export function streakCounter(storage: Storage, date: Date) : Streak {
     const streakInLocalStorage = storage.getItem(KEY) //in the function call, localstorage is passed as storage through the param
 
