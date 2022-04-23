@@ -134,4 +134,7 @@ Next up, we need to check index.ts. When you’re writing a library, you have to
 
  We’ll publish this under a named scope, i.e., <npm username>/streak-counter. Why? Well, that way, it doesn’t matter if the name is taken! It’s also nicer for the community since this is a practice project, and we won’t squat any names.
 
- 
+ As you can see, we’re just adding many new keys used by different runtimes and tools.  Explaining all of these is out of the scope of the lesson (read about different module formats here), but we’ll focus on one in particular: types. This is how we inform TypeScript of our types and include them in our npm package. More details on that [here](https://click.convertkit-mail2.com/4zul9qexw9c7uwodrrux/l2heh6uoq8mlm9b6/aHR0cHM6Ly93d3cudHlwZXNjcmlwdGxhbmcub3JnL2RvY3MvaGFuZGJvb2svZGVjbGFyYXRpb24tZmlsZXMvcHVibGlzaGluZy5odG1sI2luY2x1ZGluZy1kZWNsYXJhdGlvbnMtaW4teW91ci1ucG0tcGFja2FnZQ==).
+ We’ve also modified our test script to use this NODE_OPTIONS thing. That’s because we’re using this modern bundler, and it can’t handle our typical Jest config. We also need to modify the Jest config to be jest.config.cjs and remove the JSDoc block. It should look like this:
+
+ ℹ️ Note: This creates a new GitHub Action that installs our dependencies, runs our tests, builds our project, and then publishes it to npm (as long as it's a new version) on every push.
