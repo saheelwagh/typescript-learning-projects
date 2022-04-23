@@ -75,7 +75,7 @@ describe('streakCounter',()=>{
 
             expect(streak.currentCount).toBe(1)
         })
-        it('should sace the incemented state to local storage',()=>{
+        it('should save the incemented state to local storage',()=>{
             const key = 'streak'
             const date = new Date('12/13/2021')
             //  call it once to update the streak
