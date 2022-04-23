@@ -138,3 +138,5 @@ Next up, we need to check index.ts. When you’re writing a library, you have to
  We’ve also modified our test script to use this NODE_OPTIONS thing. That’s because we’re using this modern bundler, and it can’t handle our typical Jest config. We also need to modify the Jest config to be jest.config.cjs and remove the JSDoc block. It should look like this:
 
  ℹ️ Note: This creates a new GitHub Action that installs our dependencies, runs our tests, builds our project, and then publishes it to npm (as long as it's a new version) on every push.
+
+ Proficiency in a language also includes things like this: sharing code. You can get away with not knowing how to do this, but it vastly improves your skills. It makes you a more valuable team member because now, you can save your team time by sharing code. You know exactly how to do it. And you know how to share your code with the world. This is even more important as more and more companies are embracing open core and open source as part of how they operate.
