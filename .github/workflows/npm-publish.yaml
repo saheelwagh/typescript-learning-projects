@@ -13,5 +13,5 @@ jobs:
      - run: yarn build
      - uses: JS-DevTools/npm-publish@v1
        with:
-         token: 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
+         token: $
          access: "public"
