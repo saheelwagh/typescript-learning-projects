@@ -25,11 +25,11 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "source" : "src/index.ts",
+  "module": "./dist/index.module.cjs",
+  "unpkg": "./dist/index.umd.js",
   "exports": {
         "require": "./dist/index.cjs",
-       "default": "./dist/index.modern.js",
-       "module": "./dist/index.module.cjs",
-       "unpkg": "./dist/index.umd.js"
+       "default": "./dist/index.modern.js"
       }
     
 }
